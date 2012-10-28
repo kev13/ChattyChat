@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <h:body>
+    	<ui:composition template="template/defaultLayout.xhtml">
+ 			<ui:define name="content">
+    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
+    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
+       					 Left
+    				</p:layoutUnit>
+					
+    				<p:layoutUnit position="center">
+        				Center
+    				</p:layoutUnit>
+    				
+    				
+    				<p:layoutUnit position="south">
+        				South
+    				</p:layoutUnit>
+    				
+				</p:layout>
+           
+    		</ui:define>	
+    	</ui:composition>
+ 
+    </h:body>
+ 
+</html>
