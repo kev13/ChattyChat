@@ -24,19 +24,21 @@
 			<ui:define name="content">
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
-      				Right
+      				<p:dataList id="users" value="#{messageController.users}" var="usr">  
+    					#{usr.name}
+					</p:dataList> 
    				</p:layoutUnit>
 				
    				<p:layoutUnit position="center">
-   					<p:dataList id="hist" value="#{messageController.history}" var="message" type="ordered">  
-    					#{message.date}, #{message.user}, #{message.content}  
+   					<p:dataList id="hist" value="#{messageController.history}" var="message" style="histor">  
+    					(#{message.date}) #{message.user}: #{message.content}  
 					</p:dataList> 
-   					<h:outputText id="chat" value="#{message.content}"></h:outputText>
+   					<!--<h:outputText id="chat" value="#{message.content}"></h:outputText>  -->
        				<p:poll interval="2" update="hist"></p:poll>
    				</p:layoutUnit>
    				
    				<p:layoutUnit position="south">
-       				<h:outputLabel id="name" for="name" value="" />   
+       				<h:outputLabel id="name" for="name" value="#{messageController.username} " />   
 	    			<p:inputText id="content" size="50" value="#{messageController.content}" /> 
 	    			<p:commandButton value="#{msg.test}" id="send" actionListener="#{messageController.sendMessage}" />
    				</p:layoutUnit>
