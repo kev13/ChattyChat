@@ -1,16 +1,14 @@
 package model;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
-@ManagedBean
-@SessionScoped
 public class User {
 	public String name;
 
 	public User() {
 
+	}
+
+	public User(String string) {
+		this.name = string;
 	}
 
 	public String getName() {

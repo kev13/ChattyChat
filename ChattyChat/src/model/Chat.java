@@ -1,16 +1,10 @@
 package model;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@ManagedBean
-@SessionScoped
 public class Chat {
 
 	private String name;
@@ -18,7 +12,9 @@ public class Chat {
 	private List<Message> history;
 
 	public Chat() {
-
+		name = "default";
+		history = new ArrayList<Message>();
+		users = new HashSet<User>();
 	}
 
 	public String getName() {

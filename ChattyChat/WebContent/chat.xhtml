@@ -1,41 +1,49 @@
-<html xmlns="http://www.w3c.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:p="http://primefaces.org/ui">
-<h:head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core"
+		>
+<h:head>
+<script type="text/javascript">
+        setInterval("nextMessage()", 200); //update the chart every 200 ms               
+        
+        function updateMessages(xhr, status, args) {
+            if(!args.ok) return;
+            $('#chat').append('<div class="msg">[' +args.dateSent+ '] <strong>'+args.user+'</strong>: '+args.text+'</div>');
+        }
+        
+</script>
 </h:head>
+
 <h:body>
-	<p:layout fullPage="true">  
-	  
-	    <p:layoutUnit position="north" size="100" header="Chatty Chat" resizable="false" closable="false" collapsible="false">  
-	        <!-- <h:outputText value="" />  --> 
-	        
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="south" size="100" resizable="true" closable="true" collapsible="true">
-	    	Username: 
-	    	<p:inputText size="50" /> 
-	    	<p:commandButton value="#{msg.test}" id="send"  
-             	actionListener="#{pprBean.savePerson}" />   
-	    </p:layoutUnit>  
-	  
-	    <!-- <p:layoutUnit position="west" size="200" header="Left" resizable="true" closable="true" collapsible="true">  
-	        <h:form>  
-	           <ui:include src="../templates/themeMenu.xhtml" />
-	        </h:form>  
-	    </p:layoutUnit> -->
-	  
-	    <p:layoutUnit position="east" size="200" header="User List" resizable="false" closable="false" collapsible="false" effect="drop">  
-	        <h:outputText value="Right unit content." />  
-	    </p:layoutUnit>  
-	  
-	    <p:layoutUnit position="center">  
-	        <h:form>  
-	            This fullPage layout consists of five different layoutUnits which are resizable and closable by default.  
-	  
-	        </h:form>  
-	    </p:layoutUnit>  
-	  
-	</p:layout>
+	<ui:composition template="template/defaultLayout.xhtml">
+			<ui:define name="content">
+   			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
+   				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
+      				Right
+   				</p:layoutUnit>
+				
+   				<p:layoutUnit position="center">
+   					<p:dataList id="hist" value="#{messageController.history}" var="message" type="ordered">  
+    					#{message.date}, #{message.user}, #{message.content}  
+					</p:dataList> 
+   					<h:outputText id="chat" value="#{message.content}"></h:outputText>
+       				<p:poll interval="2" update="hist"></p:poll>
+   				</p:layoutUnit>
+   				
+   				<p:layoutUnit position="south">
+       				<h:outputLabel id="name" for="name" value="" />   
+	    			<p:inputText id="content" size="50" value="#{messageController.content}" /> 
+	    			<p:commandButton value="#{msg.test}" id="send" actionListener="#{messageController.sendMessage}" />
+   				</p:layoutUnit>
+   				
+			</p:layout>
+          
+   		</ui:define>	
+   	</ui:composition>
 </h:body>
 </html>

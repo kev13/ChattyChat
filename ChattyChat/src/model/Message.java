@@ -1,23 +1,27 @@
 package model;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
+import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 
-@ManagedBean
-@SessionScoped
-public class Message {
+import javax.faces.event.ActionEvent;
+
+public class Message implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Date date;
 	private String content;
+	private User user = new User("ueli");
 
 	public Message() {
 
 	}
 
-	public Date getDate() {
-		return date;
+	public String getDate() {
+		return DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
+		//return date;
 	}
 
 	public void setDate(Date date) {
@@ -31,4 +35,18 @@ public class Message {
 	public void setContent(String content) {
 		this.content = content;
 	}
+
+	public String getUser() {
+		return user.getName();
+		//return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public void sendMessage(ActionEvent e) {
+		date = new Date();
+	}
+
 }
