@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:f="http://java.sun.com/jsf/core"
+		>
+<h:head>
+<script type="text/javascript">
+        setInterval("nextMessage()", 200); //update the chart every 200 ms               
+        
+        function updateMessages(xhr, status, args) {
+            if(!args.ok) return;
+            $('#chat').append('<div class="msg">[' +args.dateSent+ '] <strong>'+args.user+'</strong>: '+args.text+'</div>');
+        }
+        
+</script>
+</h:head>
+
+<h:body>
+	<ui:composition template="template/defaultLayout.xhtml">
+			<ui:define name="content">
+   			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
+   				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
+      				Right
+   				</p:layoutUnit>
+				
+   				<p:layoutUnit position="center">
+					<h:outputLabel id="name_lbl" for="name" value="#{msg.name}" />
+					<br />
+					<p:inputText id="name_input" size="50" value="#{messageController.content}" /> 
+	    			<p:commandButton value="#{msg.join}" id="send_name" actionListener="#{messageController.sendMessage}" />
+					<br />
+					
+					<br />
+					<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
+
+					<p:selectOneListbox id="chats" value="#{buttonBean.number}">
+						<f:selectItem itemLabel="Chat 1" itemValue="1" />
+						<f:selectItem itemLabel="Chat 2" itemValue="2" />
+						<f:selectItem itemLabel="Chat 3" itemValue="3" />
+						<f:selectItem itemLabel="Chat 4" itemValue="4" />
+						<f:selectItem itemLabel="Chat 5" itemValue="5" />
+						<f:selectItem itemLabel="Chat 6" itemValue="6" />
+					</p:selectOneListbox>
+					<br />
+					
+					
+					<h:outputLabel id="add_chat_lbl" for="addchat" value="#{msg.add_chat}" />
+					<br />
+					<p:inputText id="add_chat_input" size="50" value="#{messageController.content}" /> 
+	    			<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" actionListener="#{messageController.sendMessage}" />
+					<!-- 
+					<h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5">
+
+						<p:selectOneButton value="#{buttonBean.number}">
+							<f:selectItem itemLabel="Chat 1" itemValue="1" />
+							<f:selectItem itemLabel="Chat 2" itemValue="2" />
+							<f:selectItem itemLabel="Chat 3" itemValue="3" />
+							<f:selectItem itemLabel="Chat 4" itemValue="4" />
+							<f:selectItem itemLabel="Chat 5" itemValue="5" />
+						</p:selectOneButton>
+
+					</h:panelGrid>
+					-->
+				</p:layoutUnit>
+   				
+   				<p:layoutUnit position="south">
+       				
+   				</p:layoutUnit>
+   				
+			</p:layout>
+          
+   		</ui:define>	
+   	</ui:composition>
+</h:body>
+</html>
