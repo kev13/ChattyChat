@@ -16,6 +16,13 @@ public class Chat {
 		history = new ArrayList<Message>();
 		users = new HashSet<User>();
 	}
+	
+	public Chat(String name){
+		this.name = name;
+		history = new ArrayList<Message>();
+		users = new HashSet<User>();
+	}
+		
 
 	public String getName() {
 		return name;
