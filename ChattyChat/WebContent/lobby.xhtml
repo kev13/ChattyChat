@@ -17,13 +17,20 @@
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
       				Right
+      				
+      				<p:selectOneListbox id="users" style="width: 180px;height: 200px;">
+						<f:selectItems value="#{userController.users}" />
+						
+					</p:selectOneListbox>
+      				
    				</p:layoutUnit>
 				
    				<p:layoutUnit position="center">
 					<h:outputLabel id="name_lbl" for="name" value="#{msg.name}" />
 					<br />
-					<p:inputText id="name_input" size="30" value="#{messageController.content}" /> 
-	    			<p:commandButton value="#{msg.join}" id="send_name" actionListener="#{messageController.sendMessage}" />
+					<p:inputText id="name_input" size="30" value="#{userController.name}" /> 
+	    			<p:commandButton value="#{msg.join}" id="send_name" action="#{userController.addUser}" update="users" actionListener="#{messageController.sendMessage}" />
+	    			
 					<br />
 					
 					<br />
