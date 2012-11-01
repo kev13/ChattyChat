@@ -11,6 +11,8 @@ import model.Lobby;
 @ManagedBean
 @ApplicationScoped
 public class ChatController {
+	private int chatNumber;
+	private String chatTopic;
 	private Lobby lobby;
 	private Set<Chat> chats;
 
@@ -20,7 +22,7 @@ public class ChatController {
 	}
 	
 	public void addChat(){
-		Chat newChat = new Chat("newChat");
+		Chat newChat = new Chat(chatTopic);
 		chats.add(newChat);
 	}
 	
@@ -28,6 +30,21 @@ public class ChatController {
 		return chats;
 	}
 
+	public int getChatNumber() {
+		return chatNumber;
+	}
+
+	public void setChatNumber(int chatNumber) {
+		this.chatNumber = chatNumber;
+	}
+
+	public String getChatTopic() {
+		return chatTopic;
+	}
+
+	public void setChatTopic(String chatTopic) {
+		this.chatTopic = chatTopic;
+	}
 	
 	
 	
