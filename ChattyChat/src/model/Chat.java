@@ -39,5 +39,9 @@ public class Chat {
 	public List<Message> getHistory() {
 		return history;
 	}
+	
+	public void addUser(User user){
+		users.add(user);	
+	}
 
 }

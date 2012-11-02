@@ -34,6 +34,8 @@ public class UserController {
 			
 			if ( !("".equals(chatTopic)) ){
 				System.out.println("Selected Chat: " + chatTopic);
+				//Set<Chat> chats = Lobby.getInstance().getChats();
+				
 				
 			} else {
 				//TODO: error
