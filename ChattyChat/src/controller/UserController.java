@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import model.Chat;
+import model.Lobby;
 import model.User;
 
 @ManagedBean
@@ -15,6 +16,7 @@ public class UserController {
 	private Set<User> users;
 	private Set<String> names;
 	private String name;
+	private String chatTopic = "";
 	private Chat chat = new Chat("test");
 	
 	public void addUser(){
@@ -30,10 +32,20 @@ public class UserController {
 			users.add(newUser);
 			names.add(newUser.getName());
 			
+			if ( !("".equals(chatTopic)) ){
+				System.out.println("Selected Chat: " + chatTopic);
+				
+			} else {
+				//TODO: error
+			}
+			
+			
 		} else {
 			
 			//TODO: error
 		}
+		
+		
 		
 		
 	}
@@ -66,6 +78,14 @@ public class UserController {
 
 	public void setNames(Set<String> names) {
 		this.names = names;
+	}
+
+	public String getChatTopic() {
+		return chatTopic;
+	}
+
+	public void setChatTopic(String chatTopic) {
+		this.chatTopic = chatTopic;
 	}
 	
 	

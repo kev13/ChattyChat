@@ -36,7 +36,7 @@
 					<br />
 					<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
 
-					<p:selectOneListbox id="chats" style="width: 300px;height: 200px;">
+					<p:selectOneListbox id="chats" value="#{userController.chatTopic}" style="width: 300px;height: 200px;">
 						<f:selectItems value="#{chatTopic.items}" />
 						
 					</p:selectOneListbox>
