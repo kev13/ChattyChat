@@ -15,11 +15,11 @@
 	<ui:composition template="template/defaultLayout.xhtml">
 			<ui:define name="content">
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
-   				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
-      				Right
+   				<p:layoutUnit position="east" resizable="true" size="200" minSize="200" maxSize="300">
       				
+      				<h:outputLabel id="active_users_lbl" for="active_users" value="#{msg.active_users_lbl}" />
       				<p:selectOneListbox id="users" style="width: 180px;height: 200px;">
-						<f:selectItems value="#{userController.users}" />
+						<f:selectItems value="#{userController.names}" />
 						
 					</p:selectOneListbox>
       				
