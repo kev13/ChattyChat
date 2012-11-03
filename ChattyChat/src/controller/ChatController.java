@@ -1,12 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 import model.Chat;
 import model.Lobby;
+import model.User;
 
 @ManagedBean
 @ApplicationScoped
@@ -15,15 +20,37 @@ public class ChatController {
 	private String chatTopic;
 	private Lobby lobby;
 	private Set<Chat> chats;
+	private Set<String> chatTopics;
 
 	public ChatController(){
 		lobby = Lobby.getInstance();
 		chats = lobby.getChats();
+		System.out.println("init");
+		chatTopics = new HashSet<String>();
+		chatTopics = getChatNames();
 	}
 	
 	public void addChat(){
+		System.out.println("calling addChat");
+		lobby = Lobby.getInstance();
+		chats = lobby.getChats();
+		chatTopics = new HashSet<String>();
+		chatTopics = getChatNames();
+		
+		System.out.println("Chat : " + chatTopic);
+		
 		Chat newChat = new Chat(chatTopic);
-		chats.add(newChat);
+		
+		if (!chats.contains(newChat)){
+			//chats.add(newChat);
+			lobby.addChat(newChat);
+			if (!chatTopics.contains(newChat.getName()))
+			{
+				chatTopics.add(newChat.getName());
+			}
+			System.out.println("Chat added: " + chatTopic);
+		}
+		
 	}
 	
 	public Set<Chat> getChats() {
@@ -46,8 +73,24 @@ public class ChatController {
 		this.chatTopic = chatTopic;
 	}
 	
-	
-	
+	public Set<String> getChatTopics() {
+		return chatTopics;
+	}
+
+	public void setChatTopics(Set<String> chatTopics) {
+		this.chatTopics = chatTopics;
+	}
+
+	public Set<String> getChatNames(){
+		Set<String> temp = this.chatTopics;
+		
+		for (Chat ch : chats){
+			temp.add(ch.getName());
+			System.out.println("name: "+ ch.getName());
+		}
+		System.out.println("write chattopics");
+		return temp;
+	}	
 	
 	
 }
