@@ -13,7 +13,8 @@
 <h:body>
 	<ui:composition template="template/defaultLayout.xhtml">
 		<ui:define name="content">
-			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
+			<p:layout style="min-width:400px;min-height:300px;" id="lobby-layout">
+				
 				<p:layoutUnit position="east" resizable="true" size="200"
 					minSize="200" maxSize="300">
 					
@@ -36,8 +37,7 @@
 							<f:validateLength minimum="3" for="name_input" /> 
 						</p:inputText> -->
 
-						<p:commandButton value="#{msg.join}" id="send_name"
-							action="#{userController.addUser}" update="users" 
+						<p:commandButton value="#{msg.join}" id="send_name" action="#{userController.addUser}" update="users" 
 							actionListener="#{userController.addUser}" />
 						<p:message id="valid_name_input" for="name_input" />
 						<br />
@@ -57,7 +57,8 @@
 						<br />
 						<p:inputText id="add_chat_input" size="30"
 							value="#{chatController.chatTopic}" />
-						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats" actionListener="#{chatController.addChat}" />
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats" 
+							actionListener="#{chatController.addChat}" />
 			
 
 				</p:layoutUnit>

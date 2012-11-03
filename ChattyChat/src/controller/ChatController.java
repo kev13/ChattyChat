@@ -1,17 +1,13 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 
 import model.Chat;
 import model.Lobby;
-import model.User;
 
 @ManagedBean
 @ApplicationScoped
@@ -31,13 +27,11 @@ public class ChatController {
 	}
 	
 	public void addChat(){
-		System.out.println("calling addChat");
 		lobby = Lobby.getInstance();
 		chats = lobby.getChats();
 		chatTopics = new HashSet<String>();
 		chatTopics = getChatNames();
 		
-		System.out.println("Chat : " + chatTopic);
 		
 		Chat newChat = new Chat(chatTopic);
 		
@@ -48,7 +42,6 @@ public class ChatController {
 			{
 				chatTopics.add(newChat.getName());
 			}
-			System.out.println("Chat added: " + chatTopic);
 		}
 		
 	}
@@ -88,7 +81,6 @@ public class ChatController {
 			temp.add(ch.getName());
 			System.out.println("name: "+ ch.getName());
 		}
-		System.out.println("write chattopics");
 		return temp;
 	}	
 	

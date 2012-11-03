@@ -33,7 +33,7 @@ public class UserController {
 			names.add(newUser.getName());
 			
 			if ( !("".equals(chatTopic)) ){
-				System.out.println("Selected Chat: " + chatTopic);
+				System.out.println("user: " + name + " selected chat: " + chatTopic);
 				//Set<Chat> chats = Lobby.getInstance().getChats();
 				
 				
