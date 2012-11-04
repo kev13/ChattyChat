@@ -2,54 +2,71 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-		xmlns:h="http://java.sun.com/jsf/html"
-		xmlns:p="http://primefaces.org/ui"
-		xmlns:ui="http://java.sun.com/jsf/facelets"
-		xmlns:f="http://java.sun.com/jsf/core"
-		>
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
 
 </h:head>
 
 <h:body>
 	<ui:composition template="template/defaultLayout.xhtml">
-			<ui:define name="content">
-   			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
-   				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
-      				Right
-   				</p:layoutUnit>
+		<ui:define name="content">
+			<p:layout style="min-width:400px;min-height:300px;" id="lobby-layout">
 				
-   				<p:layoutUnit position="center">
-					<h:outputLabel id="name_lbl" for="name" value="#{msg.name}" />
-					<br />
-					<p:inputText id="name_input" size="30" value="#{messageController.content}" /> 
-	    			<p:commandButton value="#{msg.join}" id="send_name" actionListener="#{messageController.sendMessage}" />
-					<br />
+				<p:layoutUnit position="east" resizable="true" size="200"
+					minSize="200" maxSize="300">
 					
-					<br />
-					<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
+						<h:outputLabel id="active_users_lbl" value="#{msg.active_users_lbl}" />
+						<p:selectOneListbox id="users" style="width: 180px;height: 200px;">
+							<f:selectItems value="#{userController.names}" />
+						</p:selectOneListbox>
+			
+				</p:layoutUnit>
 
-					<p:selectOneListbox id="chats" style="width: 300px;height: 200px;">
-						<f:selectItems value="#{chatTopic.items}" />
+				<p:layoutUnit position="center">
+				
+						<h:outputLabel id="name_lbl" for="name_input" value="#{msg.name}" />
+						<br />
+						<p:inputText id="name_input" size="30" value="#{userController.name}" />
+						<!--  required="true"
+							requiredMessage="name is required!"
+							validatorMessage="name must have at least 3 characters!"
+							update="valid_name_input">
+							<f:validateLength minimum="3" for="name_input" /> 
+						</p:inputText> -->
+
+						<p:commandButton value="#{msg.join}" id="send_name" action="#{userController.addUser}" update="users" />
+						<p:message id="valid_name_input" for="name_input" />
+						<br />
+						<br />
 						
-					</p:selectOneListbox>
-					<br />
-					
-					
-					<h:outputLabel id="add_chat_lbl" for="addchat" value="#{msg.add_chat}" />
-					<br />
-					<p:inputText id="add_chat_input" size="30" value="#{chatTopic.text}" /> 
-	    			<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatTopic.add}" update="chats" />
+						<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
+
+						<p:selectOneListbox id="chats" value="#{userController.chatTopic}"
+							style="width: 300px;height: 200px;">
+							<f:selectItems value="#{chatController.chatTopics}" />
+
+						</p:selectOneListbox>
+						<br />
+
+
+						<h:outputLabel id="add_chat_lbl" for="add_chat_input" value="#{msg.add_chat}" />
+						<br />
+						<p:inputText id="add_chat_input" size="30"
+							value="#{chatController.chatTopic}" />
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats, add_chat_input" />
+			
+				</p:layoutUnit>
+
+				<p:layoutUnit position="south">
 
 				</p:layoutUnit>
-   				
-   				<p:layoutUnit position="south">
-       				
-   				</p:layoutUnit>
-   				
+
 			</p:layout>
-          
-   		</ui:define>	
-   	</ui:composition>
+
+		</ui:define>
+	</ui:composition>
 </h:body>
 </html>

@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.faces.bean.ApplicationScoped;
@@ -15,15 +16,35 @@ public class ChatController {
 	private String chatTopic;
 	private Lobby lobby;
 	private Set<Chat> chats;
+	private Set<String> chatTopics;
 
 	public ChatController(){
 		lobby = Lobby.getInstance();
 		chats = lobby.getChats();
+		chatTopics = new HashSet<String>();
+		chatTopics = getChatNames();
 	}
 	
 	public void addChat(){
+		lobby = Lobby.getInstance();
+		chats = lobby.getChats();
+		chatTopics = new HashSet<String>();
+		chatTopics = getChatNames();
+		
+		
 		Chat newChat = new Chat(chatTopic);
-		chats.add(newChat);
+		
+		if (!chats.contains(newChat)){
+			//chats.add(newChat);
+			lobby.addChat(newChat);
+			if (!chatTopics.contains(newChat.getName()))
+			{
+				chatTopics.add(newChat.getName());
+			}
+		}
+		
+		this.setChatTopic(null);
+		
 	}
 	
 	public Set<Chat> getChats() {
@@ -46,8 +67,22 @@ public class ChatController {
 		this.chatTopic = chatTopic;
 	}
 	
-	
-	
+	public Set<String> getChatTopics() {
+		return chatTopics;
+	}
+
+	public void setChatTopics(Set<String> chatTopics) {
+		this.chatTopics = chatTopics;
+	}
+
+	public Set<String> getChatNames(){
+		Set<String> temp = this.chatTopics;
+		
+		for (Chat ch : chats){
+			temp.add(ch.getName());
+		}
+		return temp;
+	}	
 	
 	
 }
