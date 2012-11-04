@@ -39,12 +39,14 @@ public class UserController {
 				
 			} else {
 				//TODO: error
+				System.out.println("Please select chat topic!!");
 			}
 			
 			
 		} else {
 			
 			//TODO: error
+			System.out.println("name already taken!");
 		}
 		
 		

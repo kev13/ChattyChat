@@ -21,7 +21,6 @@ public class ChatController {
 	public ChatController(){
 		lobby = Lobby.getInstance();
 		chats = lobby.getChats();
-		System.out.println("init");
 		chatTopics = new HashSet<String>();
 		chatTopics = getChatNames();
 	}
@@ -43,6 +42,8 @@ public class ChatController {
 				chatTopics.add(newChat.getName());
 			}
 		}
+		
+		this.setChatTopic(null);
 		
 	}
 	
@@ -79,7 +80,6 @@ public class ChatController {
 		
 		for (Chat ch : chats){
 			temp.add(ch.getName());
-			System.out.println("name: "+ ch.getName());
 		}
 		return temp;
 	}	

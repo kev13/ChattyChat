@@ -37,8 +37,7 @@
 							<f:validateLength minimum="3" for="name_input" /> 
 						</p:inputText> -->
 
-						<p:commandButton value="#{msg.join}" id="send_name" action="#{userController.addUser}" update="users" 
-							actionListener="#{userController.addUser}" />
+						<p:commandButton value="#{msg.join}" id="send_name" action="#{userController.addUser}" update="users" />
 						<p:message id="valid_name_input" for="name_input" />
 						<br />
 						<br />
@@ -57,10 +56,8 @@
 						<br />
 						<p:inputText id="add_chat_input" size="30"
 							value="#{chatController.chatTopic}" />
-						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats" 
-							actionListener="#{chatController.addChat}" />
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats, add_chat_input" />
 			
-
 				</p:layoutUnit>
 
 				<p:layoutUnit position="south">
