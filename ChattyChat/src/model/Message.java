@@ -21,7 +21,6 @@ public class Message implements Serializable {
 
 	public String getDate() {
 		return DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
-		//return date;
 	}
 
 	public void setDate(Date date) {
@@ -38,7 +37,6 @@ public class Message implements Serializable {
 
 	public String getUser() {
 		return user.getName();
-		//return user;
 	}
 
 	public void setUser(User user) {
