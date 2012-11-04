@@ -1,14 +1,21 @@
 package model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String name;
+	public Chat activeChat;
 
 	public User() {
 
 	}
 
-	public User(String string) {
-		this.name = string;
+	public User(String name) {
+		this.name = name;
 	}
 
 	public String getName() {
@@ -19,4 +26,11 @@ public class User {
 		this.name = name;
 	}
 
+	public Chat getActiveChat() {
+		return activeChat;
+	}
+
+	public void setActiveChat(Chat activeChat) {
+		this.activeChat = activeChat;
+	}
 }

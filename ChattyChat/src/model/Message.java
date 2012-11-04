@@ -13,7 +13,7 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Date date;
 	private String content;
-	private User user = new User("ueli");
+	private User user;
 
 	public Message() {
 

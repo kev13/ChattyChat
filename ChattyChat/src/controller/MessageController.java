@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,41 +8,84 @@ import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.Chat;
+import model.Lobby;
 import model.Message;
 import model.User;
 
 @ManagedBean
-@SessionScoped
-public class MessageController {
+@ViewScoped
+public class MessageController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Chat chat;
 	private List<Message> history;
 	private Set<User> users;
 	private String content;
 	private String username;
+	private User user;
 
 	public MessageController() {
-		chat = new Chat();
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance()
+				.getChats());
+		
+		for (Chat c : temp) {
+			if (c.getName().equals(session.getAttribute("chat"))) {
+				chat = c;
+			}
+		}
+		
 		history = chat.getHistory();
 		users = chat.getUsers();
-		User u = new User();
-		u.setName("ueli");
-		users.add(u);
-		username = u.getName();
+		
+		System.out.println("created messsagecontroller");
+		System.out.println("attribute: " + session.getAttribute("username"));
+
+		List<User> t = new ArrayList<User>(users);
+		for(User u : t){
+			System.out.println("user: " + u.getName());
+			if(u.getName().equals(session.getAttribute("username")))
+			{
+				user = u;
+				username = u.getName();
+				System.out.println("username: " + u.getName());
+			}
+		}
 	}
 
 	public void sendMessage(ActionEvent e) {
-		if (content != null) {
+		if (content != null && history != null) {
 			Message m = new Message();
 			m.setContent(content);
+			m.setUser(user);
 			m.setDate(new Date());
 			history.add(m);
 		}
 	}
 
 	public List<Message> getHistory() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance()
+				.getChats());
+		
+		for (Chat c : temp) {
+			if (c.getName().equals(session.getAttribute("chat"))) {
+				chat = c;
+			}
+		}
+		
+		history = chat.getHistory();
 		return history;
 	}
 	

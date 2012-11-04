@@ -22,6 +22,7 @@
 						<p:selectOneListbox id="users" style="width: 180px;height: 200px;">
 							<f:selectItems value="#{userController.names}" />
 						</p:selectOneListbox>
+						<p:poll interval="1" update="users"></p:poll>
 			
 				</p:layoutUnit>
 
@@ -49,6 +50,7 @@
 							<f:selectItems value="#{chatController.chatTopics}" />
 
 						</p:selectOneListbox>
+						<p:poll interval="1" update="chats"></p:poll>
 						<br />
 
 

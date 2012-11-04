@@ -26,7 +26,8 @@
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
       				<p:dataList id="users" value="#{messageController.users}" var="usr">  
     					#{usr.name}
-					</p:dataList> 
+					</p:dataList>
+					<p:poll interval="1" update="users"></p:poll>
    				</p:layoutUnit>
 				
    				<p:layoutUnit position="center">
@@ -34,7 +35,7 @@
     					(#{message.date}) #{message.user}: #{message.content}  
 					</p:dataList> 
    					<!--<h:outputText id="chat" value="#{message.content}"></h:outputText>  -->
-       				<p:poll interval="2" update="hist"></p:poll>
+       				<p:poll interval="1" update="hist"></p:poll>
    				</p:layoutUnit>
    				
    				<p:layoutUnit position="south">
