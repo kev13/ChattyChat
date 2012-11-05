@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -101,3 +100,4 @@ public class MessageController implements Serializable {
 	}
 
 }
+
