@@ -8,15 +8,6 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		>
 <h:head>
-<script type="text/javascript">
-        setInterval("nextMessage()", 200); //update the chart every 200 ms               
-        
-        function updateMessages(xhr, status, args) {
-            if(!args.ok) return;
-            $('#chat').append('<div class="msg">[' +args.dateSent+ '] <strong>'+args.user+'</strong>: '+args.text+'</div>');
-        }
-        
-</script>
 </h:head>
 
 <h:body>
@@ -31,9 +22,9 @@
    				</p:layoutUnit>
 				
    				<p:layoutUnit position="center">
-   					<p:dataList id="hist" value="#{messageController.history}" var="message" style="histor">  
+   					<p:dataList id="hist" value="#{messageController.history}" var="message" styleClass="dataList">  
     					(#{message.date}) #{message.user}: #{message.content}  
-					</p:dataList> 
+					</p:dataList>
    					<!--<h:outputText id="chat" value="#{message.content}"></h:outputText>  -->
        				<p:poll interval="1" update="hist"></p:poll>
    				</p:layoutUnit>
