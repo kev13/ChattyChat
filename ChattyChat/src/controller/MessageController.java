@@ -71,6 +71,7 @@ public class MessageController implements Serializable {
 			m.setDate(new Date());
 			history.add(m);
 		}
+		this.setContent(null);
 	}
 
 	public List<Message> getHistory() {
