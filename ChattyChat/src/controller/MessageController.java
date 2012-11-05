@@ -34,31 +34,30 @@ public class MessageController implements Serializable {
 	private User user;
 
 	public MessageController() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+	}
+
+	private void updateData() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext
+				.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = request.getSession();
-		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance()
-				.getChats());
-		
+
+		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance().getChats());
+
 		for (Chat c : temp) {
 			if (c.getName().equals(session.getAttribute("chat"))) {
 				chat = c;
 			}
 		}
-		
+
 		history = chat.getHistory();
 		users = chat.getUsers();
-		
-		System.out.println("created messsagecontroller");
-		System.out.println("attribute: " + session.getAttribute("username"));
 
 		List<User> t = new ArrayList<User>(users);
-		for(User u : t){
+		for (User u : t) {
 			System.out.println("user: " + u.getName());
-			if(u.getName().equals(session.getAttribute("username")))
-			{
+			if (u.getName().equals(session.getAttribute("username"))) {
 				user = u;
 				username = u.getName();
-				System.out.println("username: " + u.getName());
 			}
 		}
 	}
@@ -74,38 +73,30 @@ public class MessageController implements Serializable {
 	}
 
 	public List<Message> getHistory() {
-		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		HttpSession session = request.getSession();
-		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance()
-				.getChats());
-		
-		for (Chat c : temp) {
-			if (c.getName().equals(session.getAttribute("chat"))) {
-				chat = c;
-			}
-		}
-		
+		updateData();
+
 		history = chat.getHistory();
 		return history;
 	}
-	
-	public List<User> getUsers(){
+
+	public List<User> getUsers() {
+		updateData();
 		return new ArrayList<User>(users);
 	}
 
 	public String getContent() {
 		return content;
 	}
-	
-	public String getUsername(){
+
+	public String getUsername() {
 		return username;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
-	public void addUser(User u){
+
+	public void addUser(User u) {
 		users.add(u);
 	}
 
