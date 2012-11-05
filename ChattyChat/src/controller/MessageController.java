@@ -53,7 +53,6 @@ public class MessageController implements Serializable {
 
 		List<User> t = new ArrayList<User>(users);
 		for (User u : t) {
-			System.out.println("user: " + u.getName());
 			if (u.getName().equals(session.getAttribute("username"))) {
 				user = u;
 				username = u.getName();
