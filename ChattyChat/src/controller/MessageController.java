@@ -66,6 +66,7 @@ public class MessageController implements Serializable {
 			m.setContent(content);
 			m.setUser(user);
 			m.setDate(new Date());
+			this.setContent(null);
 			history.add(m);
 		}
 	}
