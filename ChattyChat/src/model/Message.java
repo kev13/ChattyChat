@@ -7,16 +7,12 @@ import java.util.Date;
 import javax.faces.event.ActionEvent;
 
 public class Message implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Date date;
 	private String content;
 	private User user;
 
 	public Message() {
-
 	}
 
 	public String getDate() {

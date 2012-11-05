@@ -7,17 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 public class Chat implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private Set<User> users;
 	private List<Message> history;
 
 	public Chat() {
-		name = "default";
 		history = new ArrayList<Message>();
 		users = new HashSet<User>();
 	}

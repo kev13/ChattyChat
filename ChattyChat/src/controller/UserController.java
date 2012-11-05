@@ -8,10 +8,7 @@ import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
-
-import sun.org.mozilla.javascript.internal.Context;
 
 import model.Chat;
 import model.Lobby;
@@ -24,13 +21,17 @@ public class UserController {
 	private Set<String> names;
 	private String name;
 	private String chatTopic = "";
+	private List<Chat> chats;
 	private Chat chat;
+	
+	public UserController(){
+		
+	}
 
 	public String addUser() {
-		List<Chat> temp = new ArrayList<Chat>(Lobby.getInstance()
-				.getChats());
-		
-		for (Chat c : temp) {
+		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
+
+		for (Chat c : chats) {
 			if (c.getName().equals(chatTopic)) {
 				chat = c;
 			}
@@ -46,30 +47,20 @@ public class UserController {
 			names.add(newUser.getName());
 
 			if (!("".equals(chatTopic))) {
-
-				System.out.println("user: " + name + " selected chat: "
-						+ chatTopic);
-				
-				HttpSession s = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
-				s.setAttribute("username", name);
-				s.setAttribute("chat", chatTopic);
-				newUser.setActiveChat(chat);
-
+				HttpSession session = (HttpSession) FacesContext
+						.getCurrentInstance().getExternalContext()
+						.getSession(true);
+				session.setAttribute("username", name);
+				session.setAttribute("chat", chatTopic);
 				return "chat?faces-redirect=true";
-
-				// Set<Chat> chats = Lobby.getInstance().getChats();
-
 			} else {
 				// TODO: error
 				System.out.println("Please select chat topic!!");
 			}
-
 		} else {
-
 			// TODO: error
 			System.out.println("name already taken!");
 		}
-
 		return "";
 
 	}
@@ -110,6 +101,15 @@ public class UserController {
 
 	public void setChatTopic(String chatTopic) {
 		this.chatTopic = chatTopic;
+	}
+
+	public List<Chat> getChats() {
+		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
+		return chats;
+	}
+	
+	public void setChats(List<Chat> list){
+		this.chats = list;
 	}
 
 }

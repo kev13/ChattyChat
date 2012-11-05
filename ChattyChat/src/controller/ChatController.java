@@ -26,8 +26,8 @@ public class ChatController {
 	}
 	
 	public void addChat(){
-		lobby = Lobby.getInstance();
-		chats = lobby.getChats();
+		//lobby = Lobby.getInstance();
+		//chats = lobby.getChats();
 		chatTopics = new HashSet<String>();
 		chatTopics = getChatNames();
 		

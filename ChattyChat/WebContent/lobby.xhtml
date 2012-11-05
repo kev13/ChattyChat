@@ -45,13 +45,15 @@
 						
 						<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
 
-						<p:selectOneListbox id="chats" value="#{userController.chatTopic}"
+						<p:selectOneListbox id="chatlist" value="#{userController.chatTopic}"
 							style="width: 300px;height: 200px;">
 							<!-- CSS Hack auslagern -->
-							<f:selectItems value="#{chatController.chatTopics}" />
+							<!-- <f:selectItems value="#{chatController.chatTopics}" /> -->
+							<f:selectItems value="#{userController.chats}" var="chat"
+								itemLabel="#{chat.name}" itemValue="#{chat.name}"/>
 
 						</p:selectOneListbox>
-						<p:poll interval="1" update="chats"></p:poll>
+						<p:poll interval="1" update="chatlist"></p:poll>
 						<br />
 
 
@@ -59,7 +61,7 @@
 						<br />
 						<p:inputText id="add_chat_input" size="30"
 							value="#{chatController.chatTopic}" />
-						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chats, add_chat_input" />
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chatlist, add_chat_input" />
 			
 				</p:layoutUnit>
 
