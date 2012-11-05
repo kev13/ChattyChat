@@ -31,7 +31,7 @@
    				<p:layoutUnit position="south">
        				<h:outputLabel id="name" for="name" value="#{messageController.username} " />   
 	    			<p:inputText id="content" size="50" value="#{messageController.content}" /> 
-	    			<p:commandButton value="#{msg.test}" id="send" update="content" actionListener="#{messageController.sendMessage}" />
+	    			<p:commandButton value="#{msg.chat_send}" id="send" update="content" actionListener="#{messageController.sendMessage}" />
    				</p:layoutUnit>
    				
 			</p:layout>
