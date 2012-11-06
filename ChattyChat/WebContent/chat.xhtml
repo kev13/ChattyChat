@@ -11,7 +11,10 @@
 </h:head>
 <h:body>
 	<ui:composition template="template/defaultLayout.xhtml">
-			<ui:define name="content">
+		<ui:define name="header">
+			<h:outputLabel id="chat_header" for="chat_header" value="#{messageController.chatName}" />
+		</ui:define>
+		<ui:define name="content">
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
    					<h:outputLabel id="users_lbl" value="#{msg.chat_user_lbl}" />
