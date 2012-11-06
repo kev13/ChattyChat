@@ -45,6 +45,7 @@ public class UserController {
 		User newUser = new User(name);
 
 		if (!users.contains(newUser)) {
+			//check if username is already taken
 			users.add(newUser);
 			if (!("".equals(chatTopic))) {
 				return true;
@@ -103,5 +104,4 @@ public class UserController {
 		updateData();
 		this.chatTopic = chatTopic;
 	}
-
 }
