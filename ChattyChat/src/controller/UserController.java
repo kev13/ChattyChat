@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -41,23 +42,36 @@ public class UserController {
 
 	private boolean addUser() {
 		updateData();
-		users = chat.getUsers();
-		User newUser = new User(name);
-
-		if (!users.contains(newUser)) {
-			//check if username is already taken
-			users.add(newUser);
-			if (!("".equals(chatTopic))) {
-				return true;
-			} else {
-				// TODO: error
-				System.out.println("Please select chat topic!!");
-			}
-		} else {
-			// TODO: error
-			System.out.println("name already taken!");
+		
+		if ("".equals(chatTopic)) {
+			FacesContext.getCurrentInstance().addMessage(
+					"chat topic:",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"Please select chat topic!!", ""));
+			System.out.println("Please select chat topic!!");
+			return false;
 		}
-		return false;
+		
+		users = chat.getUsers();
+
+		for (User u : users) {
+			if (name.equals(u.getName())) {
+				FacesContext.getCurrentInstance().addMessage(
+						"duplicate name",
+						new FacesMessage(FacesMessage.SEVERITY_ERROR,
+								"name already taken, please use another!", ""));
+				System.out.println("name already taken!");
+				return false;
+			}
+		}
+		User newUser = new User(name);
+		users.add(newUser);
+		
+
+		
+		return true;
+
+		
 	}
 
 	public String joinChat() {
