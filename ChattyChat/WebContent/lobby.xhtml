@@ -12,6 +12,9 @@
 
 <h:body>
 	<ui:composition template="template/defaultLayout.xhtml">
+		<ui:define name="header">
+			<h:outputLabel id="lobby_header" for="lobby_header" value="Lobby" />
+		</ui:define>
 		<ui:define name="content">
 			<p:layout style="min-width:400px;min-height:300px;" id="lobby-layout">
 				
