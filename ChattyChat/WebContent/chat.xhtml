@@ -36,7 +36,7 @@
 				
    				<p:layoutUnit position="center">
    					<p:dataList id="hist" value="#{messageController.history}" var="message" styleClass="dataList">
-    					<h:outputText value="#{message.content}" style="#{message.color}" />
+    					<h:outputLabel style="#{message.color}">#{message.date} <b>#{message.user}:</b> #{message.content} </h:outputLabel>
 					</p:dataList>
    					<!--<h:outputText id="chat" value="#{message.content}"></h:outputText>  -->
        				<p:poll interval="1" update="hist"></p:poll>

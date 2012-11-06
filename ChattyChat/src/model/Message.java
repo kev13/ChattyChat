@@ -24,7 +24,7 @@ public class Message implements Serializable {
 	}
 
 	public String getContent() {
-		return getDate() + " " + user.getName() + ": " + content;
+		return content;
 	}
 
 	public void setContent(String content) {
