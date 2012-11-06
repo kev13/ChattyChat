@@ -19,17 +19,17 @@ public class UserController {
 	private Set<User> users;
 	private Set<String> names;
 	private List<Chat> chats;
-	
+
 	private String name;
 	private String chatTopic;
-	
+
 	private Chat chat;
-	
-	public UserController(){
-		
+
+	public UserController() {
+
 	}
-	
-	private void updateData(){
+
+	private void updateData() {
 		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
 
 		for (Chat c : chats) {
@@ -38,8 +38,8 @@ public class UserController {
 			}
 		}
 	}
-	
-	private boolean addUser(){
+
+	private boolean addUser() {
 		updateData();
 		users = chat.getUsers();
 		User newUser = new User(name);
@@ -60,21 +60,20 @@ public class UserController {
 	}
 
 	public String joinChat() {
-		if(addUser()){
+		if (addUser()) {
 			HttpSession session = (HttpSession) FacesContext
-					.getCurrentInstance().getExternalContext()
-					.getSession(true);
+					.getCurrentInstance().getExternalContext().getSession(true);
 			session.setAttribute("username", name);
 			session.setAttribute("chat", chatTopic);
 			return "chat?faces-redirect=true";
-		} else{
+		} else {
 			return "";
 		}
 	}
 
 	public List<User> getUsers() {
 		updateData();
-		if(chat == null)
+		if (chat == null)
 			return null;
 		return new ArrayList<User>(chat.getUsers());
 	}
@@ -95,14 +94,6 @@ public class UserController {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public Set<String> getNames() {
-		return names;
-	}
-
-	public void setNames(Set<String> names) {
-		this.names = names;
 	}
 
 	public List<Chat> getChats() {
