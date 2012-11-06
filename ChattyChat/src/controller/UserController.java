@@ -19,16 +19,18 @@ import model.User;
 public class UserController {
 	private Set<User> users;
 	private Set<String> names;
-	private String name;
-	private String chatTopic = "";
 	private List<Chat> chats;
+	
+	private String name;
+	private String chatTopic;
+	
 	private Chat chat;
 	
 	public UserController(){
 		
 	}
-
-	public String addUser() {
+	
+	private void updateData(){
 		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
 
 		for (Chat c : chats) {
@@ -36,23 +38,17 @@ public class UserController {
 				chat = c;
 			}
 		}
+	}
+	
+	private boolean addUser(){
+		updateData();
 		users = chat.getUsers();
-		names = new HashSet<String>();
-		names = getUserNames();
-
 		User newUser = new User(name);
 
 		if (!users.contains(newUser)) {
 			users.add(newUser);
-			names.add(newUser.getName());
-
 			if (!("".equals(chatTopic))) {
-				HttpSession session = (HttpSession) FacesContext
-						.getCurrentInstance().getExternalContext()
-						.getSession(true);
-				session.setAttribute("username", name);
-				session.setAttribute("chat", chatTopic);
-				return "chat?faces-redirect=true";
+				return true;
 			} else {
 				// TODO: error
 				System.out.println("Please select chat topic!!");
@@ -61,12 +57,27 @@ public class UserController {
 			// TODO: error
 			System.out.println("name already taken!");
 		}
-		return "";
-
+		return false;
 	}
 
-	public Set<User> getUsers() {
-		return users;
+	public String joinChat() {
+		if(addUser()){
+			HttpSession session = (HttpSession) FacesContext
+					.getCurrentInstance().getExternalContext()
+					.getSession(true);
+			session.setAttribute("username", name);
+			session.setAttribute("chat", chatTopic);
+			return "chat?faces-redirect=true";
+		} else{
+			return "";
+		}
+	}
+
+	public List<User> getUsers() {
+		updateData();
+		if(chat == null)
+			return null;
+		return new ArrayList<User>(chat.getUsers());
 	}
 
 	public Set<String> getUserNames() {
@@ -95,21 +106,18 @@ public class UserController {
 		this.names = names;
 	}
 
+	public List<Chat> getChats() {
+		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
+		return chats;
+	}
+
 	public String getChatTopic() {
 		return chatTopic;
 	}
 
 	public void setChatTopic(String chatTopic) {
+		updateData();
 		this.chatTopic = chatTopic;
-	}
-
-	public List<Chat> getChats() {
-		chats = new ArrayList<Chat>(Lobby.getInstance().getChats());
-		return chats;
-	}
-	
-	public void setChats(List<Chat> list){
-		this.chats = list;
 	}
 
 }

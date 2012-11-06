@@ -14,6 +14,7 @@
 			<ui:define name="content">
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
+   					<h:outputLabel id="active_users_lbl" value="#{msg.active_users_lbl}" />
       				<p:dataList id="users" value="#{messageController.users}" var="usr">  
     					#{usr.name}
 					</p:dataList>
@@ -29,8 +30,10 @@
    				</p:layoutUnit>
    				
    				<p:layoutUnit position="south">
-       				<h:outputLabel id="name" for="name" value="#{messageController.username} " />   
-	    			<p:inputText id="content" size="50" value="#{messageController.content}" /> 
+       				<h:outputLabel id="name" for="name" value="#{messageController.username} " />
+       				<p:spacer width="5" height="10" />
+	    			<p:inputText id="content" size="50" value="#{messageController.content}" />
+	    			<p:spacer width="10" height="10" />
 	    			<p:commandButton value="#{msg.chat_send}" id="send" update="content" actionListener="#{messageController.sendMessage}" />
    				</p:layoutUnit>
    				
