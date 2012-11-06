@@ -2,6 +2,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -83,6 +84,7 @@ public class MessageController implements Serializable {
 		updateData();
 
 		history = chat.getHistory();
+		Collections.reverse(history);
 		return history;
 	}
 
