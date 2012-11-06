@@ -17,7 +17,6 @@ import model.User;
 @SessionScoped
 public class UserController {
 	private Set<User> users;
-	private Set<String> names;
 	private List<Chat> chats;
 
 	private String name;
@@ -77,10 +76,6 @@ public class UserController {
 		if (chat == null)
 			return null;
 		return new ArrayList<User>(chat.getUsers());
-	}
-
-	public Set<String> getNames() {
-		return names;
 	}
 
 	public String getName() {
