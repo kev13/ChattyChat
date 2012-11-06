@@ -22,9 +22,6 @@ import model.User;
 @ManagedBean
 @ViewScoped
 public class MessageController implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private Chat chat;
 	private User user;
@@ -62,8 +59,8 @@ public class MessageController implements Serializable {
 			}
 		}
 	}
-	
-	public String leaveChat(){
+
+	public String leaveChat() {
 		updateData();
 		chat.removeUser(user);
 		return "lobby";
@@ -114,4 +111,3 @@ public class MessageController implements Serializable {
 		return chatName;
 	}
 }
-

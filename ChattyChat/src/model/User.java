@@ -1,7 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Random;
 
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -9,13 +8,11 @@ public class User implements Serializable {
 	private Color color;
 
 	public User() {
-		Random randomGenerator = new Random();
-		color.blue = randomGenerator.nextInt(255);
-		color.green = randomGenerator.nextInt(255);
-		color.red = randomGenerator.nextInt(255);
+		color = new Color();
 	}
 
 	public User(String name) {
+		this();
 		this.name = name;
 	}
 

@@ -24,7 +24,7 @@ public class Message implements Serializable {
 	}
 
 	public String getContent() {
-		return content;
+		return getDate() + " " + user.getName() + ": " + content;
 	}
 
 	public void setContent(String content) {
@@ -43,4 +43,8 @@ public class Message implements Serializable {
 		date = new Date();
 	}
 
+	public String getColor() {
+		Color c = user.getColor();
+		return "color: rgb(" + c.red + "," + c.green + "," + c.blue + ")";
+	}
 }

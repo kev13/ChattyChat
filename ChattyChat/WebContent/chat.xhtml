@@ -8,7 +8,17 @@
 		xmlns:f="http://java.sun.com/jsf/core"
 		>
 <h:head>
+<ui:define name="head">
+	<script type="text/javascript">
+			window.onunload = function()
+			{
+				// do processing here
+				alert('bye!');
+			}
+		</script>
+</ui:define>
 </h:head>
+
 <h:body>
 	<ui:composition template="template/defaultLayout.xhtml">
 		<ui:define name="header">
@@ -25,8 +35,8 @@
    				</p:layoutUnit>
 				
    				<p:layoutUnit position="center">
-   					<p:dataList id="hist" value="#{messageController.history}" var="message" styleClass="dataList">  
-    					(#{message.date}) #{message.user}: #{message.content}  
+   					<p:dataList id="hist" value="#{messageController.history}" var="message" styleClass="dataList">
+    					<h:outputText value="#{message.content}" style="#{message.color}" />
 					</p:dataList>
    					<!--<h:outputText id="chat" value="#{message.content}"></h:outputText>  -->
        				<p:poll interval="1" update="hist"></p:poll>
