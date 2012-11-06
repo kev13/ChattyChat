@@ -59,6 +59,12 @@ public class MessageController implements Serializable {
 			}
 		}
 	}
+	
+	public String leaveChat(){
+		updateData();
+		chat.removeUser(user);
+		return "lobby";
+	}
 
 	public void sendMessage(ActionEvent e) {
 		if (content != null && history != null) {

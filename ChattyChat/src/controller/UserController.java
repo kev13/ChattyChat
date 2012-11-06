@@ -78,14 +78,8 @@ public class UserController {
 		return new ArrayList<User>(chat.getUsers());
 	}
 
-	public Set<String> getUserNames() {
-		Set<String> temp = this.names;
-
-		for (User u : users) {
-			temp.add(u.getName());
-		}
-
-		return temp;
+	public Set<String> getNames() {
+		return names;
 	}
 
 	public String getName() {
