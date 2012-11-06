@@ -14,7 +14,7 @@
 			<ui:define name="content">
    			<p:layout style="min-width:400px;min-height:300px;" id="chat-layout">
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
-   					<h:outputLabel id="active_users_lbl" value="#{msg.active_users_lbl}" />
+   					<h:outputLabel id="users_lbl" value="#{msg.chat_user_lbl}" />
       				<p:dataList id="users" value="#{messageController.users}" var="usr">  
     					#{usr.name}
 					</p:dataList>
