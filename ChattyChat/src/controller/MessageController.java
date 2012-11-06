@@ -2,6 +2,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -26,11 +27,12 @@ public class MessageController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Chat chat;
+	private User user;
 	private List<Message> history;
 	private Set<User> users;
 	private String content;
 	private String username;
-	private User user;
+	private String chatName;
 
 	public MessageController() {
 	}
@@ -50,6 +52,7 @@ public class MessageController implements Serializable {
 
 		history = chat.getHistory();
 		users = chat.getUsers();
+		chatName = chat.getName();
 
 		List<User> t = new ArrayList<User>(users);
 		for (User u : t) {
@@ -81,6 +84,7 @@ public class MessageController implements Serializable {
 		updateData();
 
 		history = chat.getHistory();
+		Collections.reverse(history);
 		return history;
 	}
 
@@ -105,5 +109,9 @@ public class MessageController implements Serializable {
 		users.add(u);
 	}
 
+	public String getChatName() {
+		updateData();
+		return chatName;
+	}
 }
 
