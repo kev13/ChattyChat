@@ -21,48 +21,55 @@
 				<p:layoutUnit position="east" resizable="true" size="200"
 					minSize="200" maxSize="300">
 
-						<h:outputLabel id="active_users_lbl" value="#{msg.active_users_lbl}" />
-						<p:dataList id="users" value="#{userController.users}" var="usr">  
+					<h:outputLabel id="active_users_lbl"
+						value="#{msg.active_users_lbl}" />
+					<p:dataList id="users" value="#{userController.users}" var="usr">  
     						#{usr.name}
 						</p:dataList>
-						<p:poll interval="1" update="users"></p:poll>
+					<p:poll interval="1" update="users"></p:poll>
 
 				</p:layoutUnit>
 
 				<p:layoutUnit position="center">
-						<h:outputLabel id="name_lbl" for="name_input" value="#{msg.name}" />
-						<br />
-						<p:inputText id="name_input" size="30" value="#{userController.name}"
-							required="true"
-							requiredMessage="#{msg.requiredMessage}"
-							validatorMessage="#{msg.validatorMessage}" >
-							<f:validateLength minimum="3" for="name_input" /> 
-						</p:inputText>
+					<h:outputLabel id="name_lbl" for="name_input" value="#{msg.name}" />
+					<br />
+					<p:inputText id="name_input" size="30"
+						value="#{userController.name}" 
+						requiredMessage="#{msg.requiredMessage}"
+						validatorMessage="#{msg.validatorMessage}">
+						<f:validateLength minimum="3" for="name_input" />
+					</p:inputText>
 
-						<p:commandButton value="#{msg.join}" id="join_chat" action="#{userController.joinChat}" update="j_idt6" />
-						<p:messages></p:messages>
-						<br />
-						<br />
+					<p:commandButton value="#{msg.join}" id="join_chat"
+						action="#{userController.joinChat}" update="j_idt6" />
+					<p:messages></p:messages>
+					<br />
+					<br />
 
+					<form id="chat_form">
 
-						
 						<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
 
-						<p:selectOneListbox id="chatlist" value="#{userController.chatTopic}"
+						<p:selectOneListbox id="chatlist"
+							value="#{userController.chatTopic}"
 							style="width: 300px;height: 200px;">
 							<!-- CSS Hack auslagern -->
 							<f:selectItems value="#{userController.chats}" var="chat"
-								itemLabel="#{chat.name}" itemValue="#{chat.name}"/>
+								itemLabel="#{chat.name}" itemValue="#{chat.name}" />
 
 						</p:selectOneListbox>
 						<p:poll interval="1" update="chatlist"></p:poll>
 						<br />
 
-						<h:outputLabel id="add_chat_lbl" for="add_chat_input" value="#{msg.add_chat}" />
+						<h:outputLabel id="add_chat_lbl" for="add_chat_input"
+							value="#{msg.add_chat}" />
 						<br />
-						<p:inputText id="add_chat_input"  immediate="true" size="30"
+						<p:inputText id="add_chat_input" size="30"
 							value="#{chatController.chatTopic}" />
-						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" immediate="true" action="#{chatController.addChat}" update="chatlist, add_chat_input" />
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat"
+							action="#{chatController.addChat}"
+							update="chatlist, add_chat_input" />
+					</form>
 				</p:layoutUnit>
 
 			</p:layout>
