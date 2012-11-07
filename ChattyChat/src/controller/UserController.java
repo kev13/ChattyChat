@@ -41,25 +41,32 @@ public class UserController {
 
 	private boolean addUser() {
 		updateData();
-		
+	
 		if ("".equals(chatTopic)) {
 			FacesContext.getCurrentInstance().addMessage(
-					"chat topic:",
+					"#{msg.err_chattopic}",
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"Please select chat topic!!", ""));
-			System.out.println("Please select chat topic!!");
+							"#{msg.err_chattopic_msg}", ""));
 			return false;
 		}
+		
+		if ("".equals(name)){
+			FacesContext.getCurrentInstance().addMessage(
+					"#{msg.err_username}",
+					new FacesMessage(FacesMessage.SEVERITY_ERROR,
+							"#{msg.err_username_msg}", ""));
+			return false;
+		}
+		
 		
 		users = chat.getUsers();
 
 		for (User u : users) {
 			if (name.equals(u.getName())) {
 				FacesContext.getCurrentInstance().addMessage(
-						"duplicate name",
+						"#{msg.err_duplname}",
 						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"name already taken, please use another!", ""));
-				System.out.println("name already taken!");
+								"#{msg.err_duplname_msg}", ""));
 				return false;
 			}
 		}

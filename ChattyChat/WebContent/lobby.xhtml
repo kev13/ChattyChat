@@ -30,13 +30,12 @@
 				</p:layoutUnit>
 
 				<p:layoutUnit position="center">
-
 						<h:outputLabel id="name_lbl" for="name_input" value="#{msg.name}" />
 						<br />
 						<p:inputText id="name_input" size="30" value="#{userController.name}"
 							required="true"
-							requiredMessage="name is required!"
-							validatorMessage="name must have at least 3 characters!" >
+							requiredMessage="#{msg.requiredMessage}"
+							validatorMessage="#{msg.validatorMessage}" >
 							<f:validateLength minimum="3" for="name_input" /> 
 						</p:inputText>
 
@@ -45,6 +44,8 @@
 						<br />
 						<br />
 
+
+						
 						<h:outputLabel id="chat_lbl" value="#{msg.av_chats}" />
 
 						<p:selectOneListbox id="chatlist" value="#{userController.chatTopic}"
@@ -59,10 +60,9 @@
 
 						<h:outputLabel id="add_chat_lbl" for="add_chat_input" value="#{msg.add_chat}" />
 						<br />
-						<p:inputText id="add_chat_input" size="30"
+						<p:inputText id="add_chat_input"  immediate="true" size="30"
 							value="#{chatController.chatTopic}" />
-						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" action="#{chatController.addChat}" update="chatlist, add_chat_input" />
-
+						<p:commandButton value="#{msg.add_chat_btn}" id="send_chat" immediate="true" action="#{chatController.addChat}" update="chatlist, add_chat_input" />
 				</p:layoutUnit>
 
 			</p:layout>
