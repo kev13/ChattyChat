@@ -2,6 +2,7 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.faces.application.FacesMessage;
@@ -24,6 +25,9 @@ public class UserController {
 	private String chatTopic;
 
 	private Chat chat;
+	
+	FacesContext context = FacesContext.getCurrentInstance();
+	ResourceBundle bundle = context.getApplication().getResourceBundle(context, "msg");
 
 	public UserController() {
 
@@ -44,17 +48,17 @@ public class UserController {
 	
 		if ("".equals(chatTopic)) {
 			FacesContext.getCurrentInstance().addMessage(
-					"#{msg.err_chattopic}",
+					bundle.getString("err_chattopic"),
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"#{msg.err_chattopic_msg}", ""));
+							bundle.getString("err_chattopic_msg"), ""));
 			return false;
 		}
 		
 		if ("".equals(name)){
 			FacesContext.getCurrentInstance().addMessage(
-					"#{msg.err_username}",
+					bundle.getString("err_username"),
 					new FacesMessage(FacesMessage.SEVERITY_ERROR,
-							"#{msg.err_username_msg}", ""));
+							bundle.getString("err_username_msg"), ""));
 			return false;
 		}
 		
@@ -64,9 +68,9 @@ public class UserController {
 		for (User u : users) {
 			if (name.equals(u.getName())) {
 				FacesContext.getCurrentInstance().addMessage(
-						"#{msg.err_duplname}",
+						bundle.getString("err_duplname"),
 						new FacesMessage(FacesMessage.SEVERITY_ERROR,
-								"#{msg.err_duplname_msg}", ""));
+								bundle.getString("err_duplname_msg"), ""));
 				return false;
 			}
 		}
