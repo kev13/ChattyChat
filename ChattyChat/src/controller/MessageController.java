@@ -63,7 +63,7 @@ public class MessageController implements Serializable {
 	public String leaveChat() {
 		updateData();
 		chat.removeUser(user);
-		return "lobby";
+		return "lobby?faces-redirect=true";
 	}
 
 	public void sendMessage(ActionEvent e) {
