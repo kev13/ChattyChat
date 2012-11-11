@@ -24,13 +24,7 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public Color getColor() {
-		return color;
+	public String getColor() {
+		return "color: rgb(" + color.red + "," + color.green + "," + color.blue + ")";
 	}
-
-	public void setColor(Color color) {
-		this.color = color;
-	}
-	
-
 }

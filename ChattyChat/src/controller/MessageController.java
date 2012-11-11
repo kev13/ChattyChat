@@ -67,7 +67,7 @@ public class MessageController implements Serializable {
 	}
 
 	public void sendMessage(ActionEvent e) {
-		if (content != null && history != null) {
+		if (content != null && history != null && !content.equals("")) {
 			Message m = new Message();
 			m.setContent(content);
 			m.setUser(user);

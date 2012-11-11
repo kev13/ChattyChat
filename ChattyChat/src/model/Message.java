@@ -44,7 +44,6 @@ public class Message implements Serializable {
 	}
 
 	public String getColor() {
-		Color c = user.getColor();
-		return "color: rgb(" + c.red + "," + c.green + "," + c.blue + ")";
+		return user.getColor();
 	}
 }

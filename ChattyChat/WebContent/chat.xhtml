@@ -20,7 +20,7 @@
    				<p:layoutUnit position="east" resizable="true" size="200" minSize="100" maxSize="200">
    					<h:outputLabel id="users_lbl" value="#{msg.chat_user_lbl}" />
       				<p:dataList id="users" value="#{messageController.users}" var="usr">  
-    					#{usr.name}
+    					<h:outputLabel style="#{usr.color}">#{usr.name} </h:outputLabel>
 					</p:dataList>
 					<p:poll interval="1" update="users"></p:poll>
    				</p:layoutUnit>
